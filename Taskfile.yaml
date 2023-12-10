@@ -1,0 +1,61 @@
+version: 3
+
+env:
+  BIN_DIR: bin
+  MIGRATIONS_DIR: db/migrations
+dotenv: [".env"]
+tasks:
+
+  build:
+    cmds:
+      - templ generate
+      - go build -o bin/app  ./api/
+  run:
+    deps:
+      - build
+    cmds: 
+      - ./bin/app
+  exp: go run exp/main.go    
+  air-install:
+    desc: Install air tool for live reloading
+    cmds:
+      - go install github.com/cosmtrek/air@latest
+
+  postgres-up:
+    desc:
+    cmds:
+      - cd zarf/postgres && docker  compose up -d 
+
+  postgres-down: 
+    cmds:
+      -  cd zarf/postgres && docker compose down
+  postgres-connect:
+    cmds:
+      -  docker compose exec  -it postgres psql -U $POSTGRES_USER -d $POSTGRES_DB
+  
+  
+  migrate-new: 
+    desc: task migrate -- [migration_pair_name]
+    cmds:
+      - migrate create -seq -ext=.sql -dir=$MIGRATIONS_DIR {{.CLI_ARGS}}
+  migrate-up:
+    desc: execute migrations
+    cmds:
+      - migrate -path=$MIGRATIONS_DIR -database=$DB_DSN up
+  migrate-down:
+    desc: down all migrations
+    cmds:
+      - migrate -path=$MIGRATIONS_DIR -database=$DB_DSN down
+  migrate-goto:
+    desc: migrate to a specific version
+    cmds:
+      - migrate -path=$MIGRATIONS_DIR -database=$DB_DSN  goto {{.CLI_ARGS}}
+  migrate-force:
+    desc: used for fixing errors in SQL migrations
+    cmds:
+      - migrate -path=$MIGRATIONS_DIR -database=$DB_DSN force {{.CLI_ARGS}}  
+      
+  migrate-version:
+    desc: show current version
+    cmds:
+      - migrate -path=$MIGRATIONS_DIR -database=$DB_DSN version

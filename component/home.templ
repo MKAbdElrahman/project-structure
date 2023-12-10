@@ -1,0 +1,25 @@
+package component
+
+import "strconv"
+
+type HomeComponetData struct {
+	Global int
+	User   int
+}
+
+templ counts(global, user int) {
+	<div>Global: { strconv.Itoa(global) }</div>
+	<div>User: { strconv.Itoa(user) }</div>
+}
+
+templ form() {
+	<form action="/" method="POST">
+		<div><button type="submit" name="global" value="global">Global</button></div>
+		<div><button type="submit" name="user" value="user">User</button></div>
+	</form>
+}
+
+templ Home(data HomeComponetData) {
+	@counts(data.Global, data.User)
+	@form()
+}
