@@ -40,7 +40,7 @@ func (h *HomeHandler) HandlePost(w http.ResponseWriter, r *http.Request) {
 		globalCount++
 	}
 
-	if r.Form.Has("user") {
+	if r.Form.Has("session") {
 		currentCount := h.SessionManager.GetInt(r.Context(), "count")
 		h.SessionManager.Put(r.Context(), "count", currentCount+1)
 	}

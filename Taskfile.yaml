@@ -9,13 +9,13 @@ tasks:
   build:
     cmds:
       - templ generate
-      - go build -o bin/app  ./api/
+      - go build -o ./bin/app  ./api/
   run:
     deps:
       - build
     cmds: 
       - ./bin/app
-  exp: go run exp/main.go    
+
   air-install:
     desc: Install air tool for live reloading
     cmds:

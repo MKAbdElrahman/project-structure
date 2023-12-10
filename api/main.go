@@ -48,5 +48,9 @@ func main() {
 	r.Get("/", homeHandler.HandleGet)
 	r.Post("/", homeHandler.HandlePost)
 
+	fs := http.FileServer(http.Dir("./assets"))
+	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
+	r.Handle("/assets/*", http.StripPrefix("/assets/", http.FileServer(http.Dir("./assets"))))
+
 	http.ListenAndServe(":3000", sessionManager.LoadAndSave(r))
 }
