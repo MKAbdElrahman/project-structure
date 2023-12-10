@@ -1,0 +1,56 @@
+package component
+
+templ  navbarItem(item string) {
+	<a class="navbar-item">
+		{ item }
+	</a>
+}
+
+templ  navbarLink(link string) {
+	<a class="navbar-link">
+		{ link }
+	</a>
+}
+
+templ  navbarDivider() {
+	<hr class="navbar-divider"/>
+}
+
+templ Navbar() {
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		@div("navbar-brand") {
+			<a class="navbar-item" href="https://bulma.io">
+				@figure("is-128x28","https://bulma.io/images/bulma-logo.png")
+			</a>
+			<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+			</a>
+		}
+		@divWithID("navbar-menu","navbarBasicExample") {
+			@div("navbar-start") {
+				@navbarItem("Home")
+				@navbarItem("Documentation")
+				@div("navbar-item has-dropdown is-hoverable") {
+					@navbarLink("More")
+					@div("navbar-dropdown") {
+						@navbarItem("About")
+						@navbarItem("Jobs")
+						@navbarItem("Contact")
+						@navbarDivider()
+						@navbarItem("Report an issue")
+					}
+				}
+			}
+			@div("navbar-end") {
+				@div("navbar-item") {
+					@div("buttons") {
+						@a("button is-primary","/signup", "Sign Up")
+						@a("button is-light", "","Log In")
+					}
+				}
+			}
+		}
+	</nav>
+}

@@ -1,0 +1,49 @@
+package component
+
+
+templ signup(){
+	  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-half">
+						<form>
+							<div class="field">
+								<label class="label">Username</label>
+								<div class="control has-icons-left">
+									<input class="input is-rounded" type="text" placeholder="Enter your username"/>
+									<span class="icon is-small is-left">
+										<i class="fas fa-user"></i>
+									</span>
+								</div>
+							</div>
+							<div class="field">
+								<label class="label">Email</label>
+								<div class="control has-icons-left">
+									<input class="input is-rounded" type="email" placeholder="Enter your email"/>
+									<span class="icon is-small is-left">
+										<i class="fas fa-envelope"></i>
+									</span>
+								</div>
+							</div>
+							<div class="field">
+								<label class="label">Password</label>
+								<div class="control has-icons-left">
+									<input class="input is-rounded" type="password" placeholder="Enter your password"/>
+									<span class="icon is-small is-left">
+										<i class="fas fa-lock"></i>
+									</span>
+								</div>
+							</div>
+							<div class="field">
+								<div class="control">
+									<button class="button is-primary is-rounded">Sign Up</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+}
+
+templ Signup(){
+    @Layout(signup())
+}

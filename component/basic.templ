@@ -1,0 +1,25 @@
+package component
+
+
+
+templ link(rel string, href string) {
+	<link rel={ rel } href={ href }/>
+}
+
+templ div(class string) {
+	<div class={ class }>
+		{ children... }
+	</div>
+}
+
+templ divWithID(class string, id string) {
+	<div id={ id } class={ class }>
+		{ children... }
+	</div>
+}
+
+templ figure(class string,src string) {
+	<figure class={ class }>
+		<img src={ src }/>
+	</figure>
+}
